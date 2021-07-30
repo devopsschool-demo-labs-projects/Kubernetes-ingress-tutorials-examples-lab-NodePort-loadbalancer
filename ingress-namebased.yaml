@@ -4,15 +4,23 @@ metadata:
   name: ingress-namebased
 spec:
   rules:
-    - host: red.example.com
-      http:
-        paths:
-        - backend:
-            serviceName: hello-world-service-red
-            servicePort: 4242
-    - host: blue.example.com
-      http:
-        paths:
-        - backend:
-            serviceName: hello-world-service-blue
-            servicePort: 4343
+  - host: red.example.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello-world-service-red
+            port:
+              number: 4242
+  - host: blue.example.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello-world-service-blue
+            port:
+              number: 4343
